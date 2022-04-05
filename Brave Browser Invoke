@@ -1,0 +1,36 @@
+package LocatorsPractice;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.Assert;
+
+public class BraveBrowser {
+
+	public static void main(String[] args) throws InterruptedException {
+		System.setProperty("webdriver.chrome.driver", "C:\\selenium\\chromedriver.exe");
+		ChromeOptions opt=new ChromeOptions();
+		opt.setBinary("C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe");
+		WebDriver driver=new ChromeDriver(opt);
+		driver.get("https://www.google.com/intl/en-GB/gmail/about/");
+		driver.findElement(By.xpath("//*[text()='Sign in']")).click();
+		driver.findElement(By.xpath("//input[@type='email']")).sendKeys("devaa1990");
+		driver.findElement(By.xpath("(//button)[3]")).click();
+		Thread.sleep(2000);
+		System.out.println(driver.findElement(By.xpath("//form[@method='post']/span/section/div/div/div/div[2]")).getText());
+		driver.navigate().to("https://www.flipkart.com/");
+		String c1=driver.getTitle();
+		String c2=driver.getCurrentUrl();
+		Assert.assertTrue(c1.contains("Online"));
+		System.out.println(c1);
+		Assert.assertTrue(c2.contentEquals("https://www.flipkart.com/"));
+		System.out.println(c2);
+		driver.findElement(By.xpath("(//button)[2]")).click();
+		driver.manage().window().maximize();
+		System.out.println("BRAVE BROWSER IS WORKING FINE");
+		
+
+	}
+
+}
